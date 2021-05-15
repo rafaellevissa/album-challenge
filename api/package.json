@@ -1,6 +1,12 @@
 {
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
-    "knex": "^0.95.5"
+    "knex": "^0.95.5",
+    "mysql": "^2.18.1"
+  },
+  "scripts": {
+    "start": "nodemon src/server.js"
   }
 }

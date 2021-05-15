@@ -1,25 +1,23 @@
 const router = require('express').Router()
-
+const User = require('./controllers/User/UserController')
+const Album = require('./controllers/Album/AlbumController')
+const Photo = require('./controllers/Photo/PhotoController')
 
 router.post('/login')
 
-router.get('/user')
-router.get('/user/:id')
-router.post('/user')
-router.put('/user')
-router.delete('/user/:id')
+router.post('/user', User.Create)
 
-router.get('/photos')
-router.get('/photos/:id')
-router.post('/photos')
-router.put('/photos')
-router.delete('/photos/:id')
+router.get('/photo/album/:album_id', Photo.FindAll)
+router.get('/photo/:id', Photo.FindById)
+router.post('/photo', Photo.Create)
+router.put('/photo/:id', Photo.Update)
+router.delete('/photo/:id', Photo.Delete)
 
-router.get('/album')
-router.get('/album/:id')
-router.post('/album')
-router.put('/album')
-router.delete('/album/:id')
+router.get('/album/user/:user_id', Album.FindAll)
+router.get('/album/:id', Album.FindById)
+router.post('/album', Album.Create)
+router.put('/album/:id', Album.Update)
+router.delete('/album/:id', Album.Delete)
 
 
 module.exports = router
