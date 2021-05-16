@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const database = require('../../database/connection')
+const database = require('../../database/db')
 
 module.exports = {
     
@@ -14,9 +14,9 @@ module.exports = {
             
             if (user_exists) { return Response.status(200).json({ message: "there is already a registered user with this email" })}
             
-            const user_id = await database.table('Users').insert({email: email, password: hash}).timeout(1000)
+            const [id] = await database.table('Users').insert({email: email, password: hash}).timeout(1000)
 
-            return Response.status(200).json({data:{user_id: user_id[0], email: email, password: hash}})
+            return Response.status(200).json({data:{user_id: id, email: email, password: hash}})
         
         } catch (error) {
 
