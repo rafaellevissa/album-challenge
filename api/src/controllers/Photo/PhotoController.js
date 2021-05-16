@@ -1,9 +1,8 @@
 const database = require('../../database/connection')
 
-
 module.exports = {
     
-    async Create(Request, Response){
+    async Create(Request, Response) {
 
         try {
             
@@ -20,13 +19,13 @@ module.exports = {
         }
     },
 
-    async FindAll(Request, Response){
+    async FindAll(Request, Response) {
 
         try {
             
             const {album_id} = Request.params
 
-            const photos = await database.select().where({album_id: album_id}).from('Photos')
+            const photos = await database.select().where({album_id: album_id}).from('Photos').timeout(1000)
 
             return Response.status(200).json({data: photos})
 
@@ -37,38 +36,38 @@ module.exports = {
         }
     },
 
-    async FindById(Request, Response){
+    async FindById(Request, Response) {
 
         try {
 
             const {id} = Request.params
 
-            const photo = await database.select().where({id: id}).from('Photos').first() 
+            const photo = await database.select().where({id: id}).from('Photos').first().timeout(1000) 
 
             return Response.status(200).json({data: photo})
 
         } catch (error) {
+
             return Response.status(500).json({Error: "Error internal"})
+
         }
 
     },
 
-    async Update(){
-    },
-
-    async Delete(Request, Response){
+    async Delete(Request, Response) {
 
         try {
 
             const {id} = Request.params
 
-            await database.table('Photos').where({id: id}).delete()
+            await database.table('Photos').where({id: id}).delete().timeout(1000)
 
             return Response.status(200).json({message: 'Success'})
         
         } catch (error) {
             
             return Response.status(500).json({Error: 'Error internal'})
+            
         }
     }
 

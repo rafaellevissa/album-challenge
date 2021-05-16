@@ -1,4 +1,3 @@
-const { request, response } = require('express')
 const database = require('../../database/connection')
 const bcrypt = require('bcrypt');
 
@@ -8,7 +7,7 @@ module.exports = {
 
         const { email, password } = Request.body
 
-        const user = await database.select().where({ email: email }).from('Users').first()
+        const user = await database.select().where({ email: email }).from('Users').first().timeout(1000)
 
         if (!user) {
 
@@ -30,21 +29,5 @@ module.exports = {
 
         }
     },
-
-    async FindAll() {
-
-    },
-
-    async FindById() {
-
-    },
-
-    async Update() {
-
-    },
-
-    async Delete() {
-
-    }
 
 }

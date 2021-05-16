@@ -16,8 +16,6 @@ module.exports = {
 
             return Response.status(500).json({error: "Error internal"})
         }
-        
-        
     },
 
     async FindAll(Request, Response) {
@@ -49,7 +47,7 @@ module.exports = {
 
         } catch (error) {
 
-            return Response.status(500).json({error: error})
+            return Response.status(500).json({error: "Error internal"})
 
         }
 
@@ -70,12 +68,14 @@ module.exports = {
         } catch (error) {
             
             return Response.status(500).json({error: "Error internal"})
+            
         }
     },
 
     async Delete(Request, Response) {
             
         try {
+
             const {id} = Request.params
 
             await database.table('Albums').where({id: id}).delete()
@@ -85,6 +85,7 @@ module.exports = {
         } catch (error) {
             
             return Response.status(500).json({Error: 'Error internal'})
+
         }
     },
     
