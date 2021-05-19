@@ -1,6 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable('Albums', function(table) {
-        table.increments('id').primary();
+        table.increments('id',11).primary();
         table.varchar('title',255).notNullable()
         table.varchar('description',255).notNullable();
         table.integer('user_id').notNullable();

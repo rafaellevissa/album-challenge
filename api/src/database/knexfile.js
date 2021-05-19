@@ -1,15 +1,11 @@
 // Update with your config settings.
+const path = require('path')
 module.exports = {
   development: {
-    client: 'mysql',
+    client: 'sqlite3',
     connection: {
-      database: 'album_db',
-      user:     'root',
-      password: null
-    },
-    pool: {
-      min: 2,
-      max: 10
+      filename: path.resolve(__dirname, 'database.sqlite')
+     
     },
     migrations: {
       directory: './migrations',
